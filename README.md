@@ -9,14 +9,12 @@ Bob is a collection of scripts and Dockerfiles that we have found useful in deve
 
 Bob relies on Swift project conventions, like `swift build` and `swift test`, to enable it to enhance your server side Swift project.
 
-#### Dockerfile
+### Dockerfile
 An opinionated Dockerfile for your server side Swift app, leveraging Docker layer caching for faster build times.
 
 This Dockerfile installs openssl (because Kitura...), copies your Package.swift and prefetches and compiles dependencies. It then copies your source code, builds the app again. Changes to your source code will only result in recompilation of your project, not the dependencies.
 
 > The image's startup command assumes your project compiles a server named `App` that listens on port 8000.
-
-##### Usage 
 
 ```
 docker build . -t my-cool-app
@@ -25,6 +23,8 @@ docker build . -t my-cool-app --build-arg BUILD_CONFIGURATION=release
 
 docker run my-cool-app
 ```
+
+
 
 ## Installation instructions
 
