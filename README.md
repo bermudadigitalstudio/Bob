@@ -24,7 +24,25 @@ docker build . -t my-cool-app --build-arg BUILD_CONFIGURATION=release
 docker run my-cool-app
 ```
 
+### Scripts/mirror.sh
+A small shell script that drops you into a mirror of your Swift project in a Linux container. The container is a Swift container with openssl preinstalled.
 
+All changes to your local Swift project will be instantly reflected in your container. This is useful for coding in Xcode but checking your tests work on Linux.
+
+> The container is deleted after every run. It is recommended that your run this script in a separate terminal and keep it open.
+
+```
+swizzair:query swizzlr$ ./Scripts/mirror.sh 
++ docker build -t swift-3.0-openssl -
+Sending build context to Docker daemon 2.048 kB
+SNIP
+Successfully built fe436e359284
++ docker run --rm -it -w /code -v /Users/swizzlr/github/titan/query/Sources:/code/Sources -v ... SNIP
+root@ac8026b72484:/code# swift test
+Cloning https://github.com/bermudadigitalstudio/TitanCore.git
+HEAD is now at 584bfef Remove unnecessary code.
+SNIP
+```
 
 ## Installation instructions
 
