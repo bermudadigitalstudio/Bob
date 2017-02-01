@@ -4,18 +4,10 @@
 
 # The container will be erased on stop
 
+set -eo pipefail
+
 IMAGE=swift-3.0-openssl
 DIR="`dirname \"$0\"`"
-
-set -e
-docker build -t $IMAGE - <<EOF
-FROM swift:3.0
-
-RUN apt-get update \
-    && apt-get install -y openssl libssl-dev \
-    && rm -r /var/lib/apt/lists/*
-
-EOF
 
 args=()
 i=0
@@ -27,4 +19,13 @@ do
 done
 
 set -x
+docker build -t $IMAGE - <<EOF
+FROM swift:3.0
+
+RUN apt-get update \
+    && apt-get install -y openssl libssl-dev \
+    && rm -r /var/lib/apt/lists/*
+
+EOF
+
 docker run --rm -it -w /code ${args[@]} $IMAGE bash
