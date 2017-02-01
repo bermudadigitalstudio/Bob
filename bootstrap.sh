@@ -7,11 +7,8 @@ echo "Unpacking Scripts..."
 mkdir ./Scripts || true
 mv $BOB_DIR/Scripts/* ./Scripts
 
-if [ ! -f ".gitignore" ]
-then
-  echo "Adding .gitignore..."
-  mv $BOB_DIR/.gitignore ./
-fi
+echo "Adding .gitignore..."
+mv $BOB_DIR/.gitignore ./
 
 echo "Symlinking Dockerignore..."
 ln -s .gitignore .dockerignore || true
