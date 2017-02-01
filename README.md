@@ -3,7 +3,7 @@ Bob's your uncle.
 
 ## What is Bob?
 
-Bob is a collection of scripts and Dockerfiles that we have found useful in developing Swift apps for Linux environments on the server. You use Bob by copying these scripts into your repo and committing them as part of your source code. See [the instructions](Installation instructions) to get started.
+Bob is a collection of scripts and Dockerfiles that we have found useful in developing Swift apps for Linux environments on the server. You use Bob by copying these scripts into your repo and committing them as part of your source code. See [the instructions](#installation-instructions) to get started.
 
 ## What do you get with Bob?
 
