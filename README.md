@@ -16,7 +16,7 @@ This Dockerfile installs openssl (because Kitura...), copies your Package.swift 
 
 > The image's startup command assumes your project compiles a server named `App` that listens on port 8000.
 
-```
+```bash
 docker build . -t my-cool-app
 # By default, a debug build is used (Swift is surprisingly fast in Debug!). You can do this too:
 docker build . -t my-cool-app --build-arg BUILD_CONFIGURATION=release
@@ -31,7 +31,7 @@ All changes to your local Swift project will be instantly reflected in your cont
 
 > The container is deleted after every run. It is recommended that your run this script in a separate terminal and keep it open.
 
-```
+```bash
 swizzair:query swizzlr$ ./Scripts/mirror.sh 
 + docker build -t swift-3.0-openssl -
 Sending build context to Docker daemon 2.048 kB
