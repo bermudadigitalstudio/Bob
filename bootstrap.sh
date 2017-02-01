@@ -5,7 +5,7 @@ BOB_DIR="`dirname \"$0\"`"
 
 echo "Unpacking Scripts..."
 mkdir ./Scripts || true
-mv $BOB_DIR/Scripts/* ./
+mv $BOB_DIR/Scripts/* ./Scripts
 
 if [ ! -f ".gitignore" ]
 then
