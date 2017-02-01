@@ -24,6 +24,9 @@ docker build . -t my-cool-app --build-arg BUILD_CONFIGURATION=release
 docker run my-cool-app
 ```
 
+### .gitignore and .dockerignore
+A slightly modified .gitignore than the one provided by `swift package init`, and a .dockerignore file that is simply a symlink of the .gitignore.
+
 ### Scripts/mirror.sh
 A small shell script that drops you into a mirror of your Swift project in a Linux container. The container is a Swift container with openssl preinstalled.
 
@@ -44,9 +47,29 @@ HEAD is now at 584bfef Remove unnecessary code.
 SNIP
 ```
 
+### Scripts/test.sh
+A special `Dockerfile~test` is used which copies files and caches fetched packages but does no compilation. The run command is `swift test`, and a bit of extra code on the end ensures that if the container's test runner crashes, an alert in red is printed and a bell is played to [avoid the useless output currently provided by swift test](https://bugs.swift.org/browse/SR-3822).
+
+```bash
+./Scripts/test.sh
+```
+
+### Scripts/generate_LinuxMain.sh
+Auto generate a LinuxMain file using Sourcery and the LinuxMain template. This script requires you to have Sourcery installed, and will prompt you if you do not.
+
+On first run, you will see an error asking you to edit the script – the one thing Sourcery can't detect is the name of your test target, e.g. `MyCoolAppTests`. Edit it that, and you're good to go.
+
+```bash
+./Scripts/generate_LinuxMain.sh
+```
+
 ## Installation instructions
 
-Unpack the contents of this repo into a subdirectory of your current directory and run the bootstrap script.
+Use `swift package init` to get started if you don't yet have a project, and `cd` into the project. Ensure you've got everything you want committed, since this installation is semi-destructive!
+
+Unpack the contents of this repo into a subdirectory of your current directory and run the bootstrap script. If you're lazy, copy and paste the below command.
+
+The bootstrap script automatically deletes its enclosing folder, so no cleanup is necessary.
 
 ```bash
 mkdir tmp-bob \
