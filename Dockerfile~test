@@ -1,0 +1,15 @@
+FROM swift:3.0
+RUN apt-get update \
+    && apt-get install -y openssl libssl-dev \
+    && rm -r /var/lib/apt/lists/*
+
+WORKDIR /code
+
+COPY Package.swift /code/
+RUN swift package fetch
+
+COPY ./Sources /code/Sources
+COPY ./Tests /code/Tests
+
+CMD swift test
+
