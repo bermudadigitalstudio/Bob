@@ -7,7 +7,7 @@ WORKDIR /code
 ARG BUILD_CONFIGURATION=debug
 
 COPY Package.swift /code/
-RUN swift build -c $BUILD_CONFIGURATION
+RUN swift build -c $BUILD_CONFIGURATION || true
 
 COPY ./Sources /code/Sources
 RUN swift build -c $BUILD_CONFIGURATION

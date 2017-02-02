@@ -6,10 +6,10 @@ RUN apt-get update \
 WORKDIR /code
 
 COPY Package.swift /code/
-RUN swift package fetch
+RUN swift build || true
 
 COPY ./Sources /code/Sources
+RUN swift build
+
 COPY ./Tests /code/Tests
-
 CMD swift test
-
