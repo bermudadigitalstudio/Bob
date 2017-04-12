@@ -36,7 +36,7 @@ All changes to your local Swift project will be instantly reflected in your cont
 
 ```bash
 swizzair:query swizzlr$ ./Scripts/mirror.sh 
-+ docker build -t swift-3.0-openssl -
++ docker build -t swift-3.1 -
 Sending build context to Docker daemon 2.048 kB
 SNIP
 Successfully built fe436e359284
