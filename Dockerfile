@@ -18,6 +18,7 @@ ARG BUILD_CONFIGURATION=debug
 COPY Package.swift Package.resolved /code/
 RUN swift build --enable-prefetching -c $BUILD_CONFIGURATION || true
 
+RUN rm -r /code/Sources # in case of prebuilt deps, effectively a no-op otherwise
 COPY ./Sources /code/Sources
 RUN swift build -c $BUILD_CONFIGURATION
 

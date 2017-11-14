@@ -17,8 +17,10 @@ WORKDIR /code
 COPY Package.swift Package.resolved /code/
 RUN swift build --enable-prefetching || true
 
+RUN rm -r /code/Sources # In case you enabled prebuild earlier
 COPY ./Sources /code/Sources
 RUN swift build
 
+RUN rm -r /code/Tests # In case you enabled prebuild earlier
 COPY ./Tests /code/Tests
 CMD swift test
