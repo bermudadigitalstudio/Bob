@@ -1,14 +1,26 @@
-FROM swift:3.1
+FROM swift:4.0
 
 WORKDIR /code
 ARG BUILD_CONFIGURATION=debug
 
-COPY Package.swift Package.pins /code/
-RUN swift build -c $BUILD_CONFIGURATION || true
+# PREBUILD DEPENDENCIES (Optional)
+#
+# Use the following procedure to compile your dependencies and cache them in
+# a separate docker layer.
+
+# Uncomment the following to create 'dummy' targets
+# These must match your 'Package.swift' target definition exactly.
+# RUN mkdir /code/Sources \
+#   /code/Sources/Server \
+#   # /code/Sources/MyLib \ etc
+#   find /code/Sources/* -type d -exec sh -c 'touch "$0/main.swift"' {} \;
+
+COPY Package.swift Package.resolved /code/
+RUN swift build --enable-prefetching -c $BUILD_CONFIGURATION || true
 
 COPY ./Sources /code/Sources
 RUN swift build -c $BUILD_CONFIGURATION
 
-EXPOSE 8000
+EXPOSE 80
 ENV BUILD_CONFIGURATION $BUILD_CONFIGURATION
 CMD .build/$BUILD_CONFIGURATION/Server
